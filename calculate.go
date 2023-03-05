@@ -13,14 +13,14 @@ import (
 
 func main() {
 	// регулярное выражение для валидации входящих данных
-	reg, _ := regexp.Compile(`^(([1-9]|10){1}\s[+\-\*/]\s([1-9]|10){1})|((I|II|III|IV|V|VI|VII|VIII|IX|X){1}\s[+\-*/]\s(I|II|III|IV|V|VI|VII|VIII|IX|X){1})$`)
+	reg, _ := regexp.Compile(`^((([1-9]|10){1}\s[+\-\*/]\s([1-9]|10){1})|((I|II|III|IV|V|VI|VII|VIII|IX|X){1}\s[+\-*/]\s(I|II|III|IV|V|VI|VII|VIII|IX|X){1})){1}$`)
 	reader := bufio.NewReader(os.Stdin)
 
 	fmt.Println("Input:")
 	text, _ := reader.ReadString('\n')
 	text = strings.TrimRight(text, "\r\n") // убираю токен возврата каретки и переноса строки
 	if reg.MatchString(text) == false {    // проверяю валидна ли входящая строка
-		fmt.Println(errors.New("Ошибка: неккоректный ввод данных"))
+		fmt.Println(errors.New("Ошибка: некорректный ввод данных"))
 		os.Exit(1)
 	}
 
@@ -93,10 +93,10 @@ func romanToInteger(operand string) uint {
 		}
 		if num >= greatest { // если число больше чем наибольшего, тогда
 			greatest = num  // перезаписываю наибольшее
-			sum = sum + num // прибавляю к итоговому значению
+			sum = sum + num // прибавляю число к итоговому значению
 			continue
 		}
-		sum = sum - num // если число меньше чем наибольшего, тогда отнимаю число от итогового значения
+		sum = sum - num // если число меньше чем наибольшее, тогда отнимаю число от итогового значения
 	}
 	return uint(sum)
 }
